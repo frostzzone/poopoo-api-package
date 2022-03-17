@@ -12,7 +12,7 @@ Welcome to an "ok" api
 
 ```js
 (async () => {
-    const poo = require('./src')
+    const poo = require('poopoo-api')
 
     poo.image('./image.png', 'https://api.frostzzone.repl.co/example.png', false) // saves image for later use :troll:
 
