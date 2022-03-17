@@ -1,0 +1,25 @@
+{
+  "name": "poopoo-api",
+  "version": "1.0.0",
+  "description": "the whole poopoo api in one package",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "a repo"
+  },
+  "keywords": [
+    "poopoo",
+    "api"
+  ],
+  "author": "frostzzone",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "jimp": "^0.16.1",
+    "node-fetch": "^3.2.3",
+    "npm": "^8.5.4"
+  }
+}
