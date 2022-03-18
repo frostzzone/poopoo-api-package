@@ -9,7 +9,7 @@ const fetch = (...args) => import('node-fetch').then(({
     default: fetch
 }) => fetch(...args))
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-var item
+
 const github = require('./githubuser.js')
 const imageTypes = ['.png', '.apng', '.jpeg', '.webp', '.ico', '.bmp']
 

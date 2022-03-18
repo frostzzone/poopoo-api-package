@@ -1,3 +1,7 @@
+const fetch = (...args) => import('node-fetch').then(({
+    default: fetch
+}) => fetch(...args))
+var item
 async function qotd() {
     try {
         const response = await fetch('https://api.frostzzone.repl.co/qotd');
