@@ -3,12 +3,14 @@ var path = require('path');
 const Jimp = require('jimp')
 const chalk = require('chalk')
 var isInvalid = require('./is-invalid-path.js');
+const isValidUrl = require('./isValidUrl.js')
+const question = require('./qotd.js')
 const fetch = (...args) => import('node-fetch').then(({
     default: fetch
 }) => fetch(...args))
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-var item
 
+const github = require('./githubuser.js')
 const imageTypes = ['.png', '.apng', '.jpeg', '.webp', '.ico', '.bmp']
 
 function textReplace(haystack, needle, replacement) {
@@ -18,13 +20,7 @@ function textReplace(haystack, needle, replacement) {
 }
 
 function isValidUrl(string) {
-    try {
-        new URL(string);
-    } catch (_) {
-        return false;
-    }
-
-    return true;
+    return isValidUrl.isValidUrl()
 }
 
 function listsGetRandomItem(list, remove) {
@@ -53,113 +49,6 @@ async function image(path1, url1, logs) {
     if (log == true) {
         console.log(`Saved image at ${path}`)
     }
-}
-
-async function qotd() {
-    try {
-        const response = await fetch('https://api.frostzzone.repl.co/qotd');
-        const data = await response.json();
-        item = data['question']
-        return item;
-    } catch (err) {
-        console.log(chalk.hex('#FFA500')("There were issues with the api, using a built in list") + '\n' + chalk.hex('#ff0000').bold(`List may be out of date`))
-        const list = [
-            "Are you happy about yourself?",
-            "Do you like playing video games? If yes, then what is your favorite game genre?",
-            "What was your favorite hobby as a kid?",
-            "Has your life been rough recently?",
-            "Why did you choose your usernames? What is the story behind them?",
-            "If you have a chance to change the past, what would you change?",
-            "Have you ever been bullied at school/work? What did you do to stop the bullying?",
-            "Do you know any coding languages?",
-            "Is there anything that you about yourself that you find weird?",
-            "What continents are you from? (Asia/Africa/North America/South America/Antarctica/Europe/Australia)",
-            "[Troll Question] Do you like hamburger with pinapples?",
-            "Would you rather to eat at KFC or McDonalds?",
-            "Have you broken any rules in a Discord server?",
-            "Do you have a job? If yes, then what is it?",
-            "What is your favorite season? (Spring/Summer/Autumn/Winter)",
-            "What do you do during freetimes?",
-            "Would you consider yourself a nerd?",
-            "If you have a choice to choose your nationality, what country would you want to be in?",
-            "What chatting app do you use the most? (Discord, Skype, Twitter DM, Messenger, Slack, etc)",
-            "Does Children's Online Privacy Protection Rule (\"COPPA\") actually protects children or is it blocking kids from seeing the reality?",
-            "Do you have enough money to afford Minecraft?",
-            "If you have a chance to change your past, what would you change?",
-            "Have you ever been hacked? If yes, how did you try to get your accounts back?",
-            "What can you do to calm yourself down when you are mad?"
-        ]
-        item = listsGetRandomItem(list, false)
-        return (item);
-    }
-}
-
-async function github(user) {
-    if (user == undefined) {
-        console.log(chalk.hex('#ff0000').bold(`Please specify a user`))
-        const object = new Object();
-        object['url'] = "undefined"
-        object['avatar'] = "undefined"
-        object['account_type'] = "undefined"
-        object['name'] = "undefined"
-        object['company'] = "undefined"
-        object['blog'] = "undefined"
-        object['location'] = "undefined"
-        object['email'] = "undefined"
-        object['bio'] = "undefined"
-        object['twitter'] = "undefined"
-        object['public_repos'] = "undefined"
-        object['public_gists'] = "undefined"
-        object['followers'] = "undefined"
-        object['following'] = "undefined"
-        object['created_at'] = "undefined"
-        object['updated_at'] = "undefined"
-        return object;
-    }
-    const response = await fetch('https://api.github.com/users/' + user);
-    const data = await response.json();
-    const object = new Object();
-    object['url'] = data.url;
-    object['avatar'] = data.avatar_url;
-    object['account_type'] = data.type;
-    object['name'] = data.login;
-    if (data.company == null) {
-        object['company'] = "None"
-    } else {
-        object['company'] = data.company;
-    }
-    if (data.blog == null) {
-        object['blog'] = "None"
-    } else {
-        object['blog'] = data.blog;
-    }
-    if (data.location == null) {
-        object['location'] = "Not set"
-    } else {
-        object['location'] = data.location;
-    }
-    if (data.email == null) {
-        object['email'] = "None"
-    } else {
-        object['email'] = data.email;
-    }
-    if (data.bio == null) {
-        object['bio'] = "No Bio"
-    } else {
-        object['bio'] = data.bio;
-    }
-    if (data.twitter_username == null) {
-        object['twitter'] = "Not Set";
-    } else {
-        object['twitter'] = data.twitter_username;
-    }
-    object['public_repos'] = data.public_repos;
-    object['public_gists'] = data.public_gists;
-    object['followers'] = data.followers;
-    object['following'] = data.following;
-    object['created_at'] = data.created_at;
-    object['updated_at'] = data.updated_at;
-    return object;
 }
 
 function encode(tex) {
@@ -227,8 +116,8 @@ async function remove(typ, text){
 
 module.exports = {
     image: image,
-    qotd: qotd,
-    git: github,
+    qotd: question.qotd(),
+    git: github.user(),
     encode: encode,
     decode: decode,
 spoil: spoiler,
