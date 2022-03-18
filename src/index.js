@@ -3,6 +3,7 @@ var path = require('path');
 const Jimp = require('jimp')
 const chalk = require('chalk')
 var isInvalid = require('./is-invalid-path.js');
+const isValidUrl = require('./isValidUrl.js')
 const fetch = (...args) => import('node-fetch').then(({
     default: fetch
 }) => fetch(...args))
@@ -18,13 +19,7 @@ function textReplace(haystack, needle, replacement) {
 }
 
 function isValidUrl(string) {
-    try {
-        new URL(string);
-    } catch (_) {
-        return false;
-    }
-
-    return true;
+    return isValidUrl.isValidUrl()
 }
 
 function listsGetRandomItem(list, remove) {
