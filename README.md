@@ -1,10 +1,11 @@
 # 💩 poopoo-api
 
 Welcome to an "ok" api
+
 [![NPM](https://nodei.co/npm/poopoo-api.png)](https://nodei.co/npm/poopoo-api/)
 [![downloadsBadge](https://img.shields.io/npm/dt/poopoo-api?style=for-the-badge)](https://npmjs.com/poopoo-api)[![versionBadge](https://img.shields.io/npm/v/poopoo-api?style=for-the-badge)](https://npmjs.com/poopoo-api)
 
-⭐ If you like this package, don't forget to star Github repo [here](https://github.com/frostzzone/poopoo-api)
+⭐ If you like this package, don't forget to star Github package repo [here](https://github.com/frostzzone/poopoo-api-package) and the website repo [here](https://github.com/frostzzone/poopoo-api)
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "name": "poopoo-api",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "the whole poopoo api in one package",
   "main": "src/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "a repo"
+    "url": "https://github.com/frostzzone/poopoo-api"
   },
   "keywords": [
     "poopoo",
