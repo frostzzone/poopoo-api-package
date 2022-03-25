@@ -1,6 +1,7 @@
 const fetch = (...args) => import('node-fetch').then(({
     default: fetch
 }) => fetch(...args))
+const chalk = require('chalk')
 async function github(user) {
     if (user == undefined) {
         console.log(chalk.hex('#ff0000').bold(`Please specify a user`))

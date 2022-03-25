@@ -1,6 +1,7 @@
 const fetch = (...args) => import('node-fetch').then(({
     default: fetch
 }) => fetch(...args))
+const chalk = require('chalk')
 var item
 async function qotd() {
     try {
